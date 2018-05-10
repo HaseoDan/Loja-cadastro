@@ -2,22 +2,60 @@
   <form [formGroup]="formGroup" (ngSubmit)="enviar">
     <div>
       <label>Nome</label>
-      <input formControlName="nome" type="text" />
+      <input formControlName="nome" type="text" class="form-control" />
       <p *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors">Valor inválido</p>
     </div>
+
     <div>
-      <label>Endereço</label>
-      <input formControlName="endereco" type="text" />
-      <p *ngIf="formGroup.controls.endereco.dirty && formGroup.controls.endereco.errors">Valor inválido</p>
+      <label>CEP</label>
+      <input formControlName="cep" type="text" class="form-control" /> 
+      <p *ngIf="formGroup.controls.cep.dirty && formGroup.controls.cep.errors">Valor inválido</p>
     </div>
+
     <div>
-      <label>E-mail</label>
-      <input formControlName="email" type="text" />
+        <button (click)="consultaCep()" type="button" class="btn btn-primary">Consultar CEP</button>
+    </div>
+ 
+    <div>
+      <label>Complemento</label>
+      <input formControlName="complemento" type="text" class="form-control" />
+      <p *ngIf="formGroup.controls.complemento.dirty && formGroup.controls.complemento.errors">Valor inválido</p>
+    </div>
+
+    <div>
+      <label>Logradouro</label>
+      <input formControlName="logradouro" type="text" class="form-control" />
+      <p *ngIf="formGroup.controls.logradouro.dirty && formGroup.controls.logradouro.errors">Valor inválido</p>
+    </div>
+
+    <div>
+      <label>Bairro</label>
+      <input formControlName="bairro" type="text" class="form-control" />
+      <p *ngIf="formGroup.controls.bairro.dirty && formGroup.controls.bairro.errors">Valor inválido</p>
+    </div>
+
+    <div>
+      <label>Localidade</label>
+      <input formControlName="localidade" type="text" class="form-control" />
+      <p *ngIf="formGroup.controls.localidade.dirty && formGroup.controls.localidade.errors">Valor inválido</p>
+    </div>
+
+    <div>
+      <label>UF</label>
+      <input formControlName="uf" type="text" class="form-control" />
+      <p *ngIf="formGroup.controls.uf.dirty && formGroup.controls.uf.errors">Valor inválido</p>
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input formControlName="email" type="text" class="form-control" />
       <p *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors">Valor inválido</p>
     </div>
+
     <div>
+      
       <label>Senha</label>
-      <input formControlName="senha" type="text" />
+      <input formControlName="senha" type="text"  />
       <p *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors">Valor inválido</p>
     </div>
     <div>
@@ -25,3 +63,4 @@
     </div>
   </form>
 </div>
+

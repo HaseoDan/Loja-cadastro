@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { EnderecoService } from "../services/endereco.service";
+import { Endereco } from "../model/endereco";
 
 
 @Component({
@@ -9,14 +11,21 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 })
 export class CadastroComponent implements OnInit {
   
-
+  //cep : string;
+  endereco : Endereco;
   formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+  private enderecoService : EnderecoService) {
 
     this.formGroup = this.formBuilder.group({
       nome : ['',[Validators.required, Validators.minLength(3)]],
-      endereco : ['',[Validators.required, Validators.minLength(5)]],
+      logradouro : [''],
+      complemento : [''],
+      localidade : [''],
+      bairro : [''],
+      uf : [''],
+      cep : ['',[Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       email : ['',[Validators.required, Validators.email]],
       senha : ['',[Validators.required, Validators.minLength(6),Validators.maxLength(10)]],
     });
@@ -27,5 +36,29 @@ export class CadastroComponent implements OnInit {
 
   enviar(){
     console.log(this.formGroup.value);
+  }
+  consultaCep(){
+    let cep = this.formGroup.controls["cep"].value;
+
+    this.enderecoService.getEndereco(cep)
+    .subscribe(response => { 
+      this.endereco = response;
+
+      this.formGroup.controls["logradouro"].setValue(this.endereco.logradouro);
+
+      this.formGroup.controls["complemento"].setValue(this.endereco.complemento);
+
+        this.formGroup.controls["bairro"].setValue(this.endereco.bairro);
+
+          this.formGroup.controls["localidade"].setValue(this.endereco.localidade);
+
+          this.formGroup.controls["uf"].setValue(this.endereco.uf);
+    },error => {
+      alert("Cep Invalido");
+    
+
+
+    
+     });
   }
 }
